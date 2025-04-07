@@ -1,1 +1,126 @@
-# DevOps-tasks
+                        TASK 1 Automate Code Deployment Using CICD Pipeline
+**Overview**
+  Automatically build, test, and deploy your application every time you push code to your repository.
+
+ **Tools Involved**
+  1. GitHub Actions: Automate your build, test, and deployment steps.
+
+  2.Docker: Package your app into a container.
+
+  3. DockerHub: Store and share your container images.
+
+  4. Node.js: (app.js) – the application being deployed.
+
+What Happens in the Pipeline?
+Trigger:
+
+The pipeline starts automatically on a git push to the main branch.
+
+Checkout Code:
+
+Pulls your source code into the GitHub Actions runner.
+
+Install Dependencies
+
+Runs npm install to set up the app.
+
+Run Tests
+
+Runs npm test to ensure everything is working.
+
+Build Docker Image
+
+Builds a Docker image from the Dockerfile.
+
+Login to DockerHub
+
+Uses your DockerHub credentials stored in GitHub Secrets.
+
+Push Image to DockerHub
+
+Pushes the image to your DockerHub repository for deployment or sharing.
+
+**Prerequisites:**
+  Before you begin:
+
+    Have a GitHub account
+
+    Have a DockerHub account
+
+    Create a GitHub repo for your Node.js app
+
+    Generate a DockerHub access token: https://hub.docker.com/settings/security
+
+
+
+**File Structure:**
+
+  1.github/
+    └── workflows/
+        └── main.yml  ← GitHub Actions pipeline
+  2. Dockerfile
+  3. package.json
+  4. app.js  (or your app code)
+
+ Simple Node.js code
+ package.json file
+ Dockerfile
+ .github/workflows/main.yml
+
+ **GitHub Secrets:**
+   Go to your GitHub repo → Settings → Secrets and Variables → Actions -> Repository secrets
+
+**Add:**
+
+DOCKER_USERNAME = your DockerHub username   # give here docker hub username (imp: same name DOCKER_USERNAME given in inside of main.yml .github/workflows/main.yml)
+
+DOCKER_PASSWORD = your DockerHub access token   # give here docker hub PAT(personal access token) (imp: same name DOCKER_PASSWORD given in inside of main.yml .github/workflows/main.yml)
+
+GitHub Actions CI/CD: .github/workflows/main.yml
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # this is use for enable run pipeline Button
+
+jobs:
+  build-test-push:
+    name: Build, Test & Push Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker Image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/nodejs-demo-app:latest .
+
+      - name: Push Docker Image to DockerHub
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/nodejs-demo-app:latest
+
+**Goals:** Automatically build, test, and deploy your application every time you push code to your repository.
+
+
+      
