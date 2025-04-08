@@ -57,7 +57,7 @@
 **File Structure:**
 
   ![Image](https://github.com/user-attachments/assets/d8cdebed-c371-4719-8121-e65ee309cdb5)
-```sh
+
  **GitHub Secrets:**
    - Go to your GitHub repo → Settings → Secrets and Variables → Actions -> Repository secrets
 
@@ -69,7 +69,7 @@
   - DOCKER_PASSWORD = your DockerHub access token   # give here docker hub               PAT(personal access token) (imp: same name                DOCKER_PASSWORD given in inside of        main.yml .github/workflows/main.yml)
 
 # GitHub Actions CI/CD: .github/workflows/main.yml
-```
+```sh
 name: CI/CD Pipeline
 
 on:
