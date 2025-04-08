@@ -56,17 +56,7 @@
 
 **File Structure:**
 ```sh
-  1.github/
-    └── workflows/
-        └── main.yml  ← GitHub Actions pipeline
-  2. Dockerfile
-  3. package.json
-  4. app.js  (or your app code)
-
- Simple Node.js code
- package.json file
- Dockerfile
- .github/workflows/main.yml
+  ![Image](https://github.com/user-attachments/assets/d8cdebed-c371-4719-8121-e65ee309cdb5)
 ```
  **GitHub Secrets:**
    - Go to your GitHub repo → Settings → Secrets and Variables → Actions -> Repository secrets
