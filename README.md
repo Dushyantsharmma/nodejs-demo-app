@@ -55,9 +55,9 @@
 
 
 **File Structure:**
-```sh
+
   ![Image](https://github.com/user-attachments/assets/d8cdebed-c371-4719-8121-e65ee309cdb5)
-```
+```sh
  **GitHub Secrets:**
    - Go to your GitHub repo → Settings → Secrets and Variables → Actions -> Repository secrets
 
